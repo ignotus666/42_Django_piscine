@@ -1,64 +1,59 @@
 import sys
 
+def get_dicts():
+    states = {
+        "Oregon" : "OR",
+        "Alabama" : "AL",
+        "New Jersey": "NJ",
+        "Colorado" : "CO"
+    }
+    capital_cities = {
+        "OR": "Salem",
+        "AL": "Montgomery",
+        "NJ": "Trenton",
+        "CO": "Denver"
+    }
+    return states, capital_cities
 
-def get_data():
-	states = {
-		"Oregon" : "OR",
-		"Alabama" : "AL",
-		"New Jersey": "NJ",
-		"Colorado" : "CO"
-	}
-	capital_cities = {
-		"OR": "Salem",
-		"AL": "Montgomery",
-		"NJ": "Trenton",
-		"CO": "Denver"
-	}
-	return states, capital_cities
+def dicts_lookup(states, capital_cities):
+    state_lookup = {}
+    capital_lookup = {}
+    for state, state_code in states.items():
+        capital_city = capital_cities.get(state_code)
+        if capital_city:
+            state_lookup[state.lower()] = (state, capital_city)
+            capital_lookup[capital_city.lower()] = (state, capital_city)
+    return state_lookup, capital_lookup
 
+def clear_expressions(arg_str):
+    expressions = arg_str.split(",")
+    cleaned_expressions = []
+    for expr in expressions:
+        clean_expr = " ".join(expr.split())
+        if not clean_expr:
+            continue
+        cleaned_expressions.append(clean_expr)
+    return cleaned_expressions
 
-def normalize(text):
-	return " ".join(text.strip().split()).lower()
+def check_and_print(cleaned_expressions, state_lookup, capital_lookup):
+    for clean_expr in cleaned_expressions:
+        lower_expr = clean_expr.lower()
+        if lower_expr in state_lookup:
+            found_state, found_city = state_lookup[lower_expr]
+            print(f"{found_city} is the capital of {found_state}")
+        elif lower_expr in capital_lookup:
+            found_state, found_city = capital_lookup[lower_expr]
+            print(f"{found_city} is the capital of {found_state}")
+        else:
+            print(f"{clean_expr} is neither a capital city nor a state")
 
-
-def build_lookup(states, capital_cities):
-	state_to_capital = {}
-	capital_to_state = {}
-
-	for state_name, code in states.items():
-		capital_name = capital_cities[code]
-		state_to_capital[normalize(state_name)] = (state_name, capital_name)
-		capital_to_state[normalize(capital_name)] = (state_name, capital_name)
-
-	return state_to_capital, capital_to_state
-
-
-def main():
-	if len(sys.argv) != 2:
-		return
-
-	query = sys.argv[1]
-	if ",," in query:
-		return
-
-	states, capital_cities = get_data()
-	state_to_capital, capital_to_state = build_lookup(states, capital_cities)
-
-	for raw_expr in query.split(","):
-		display_expr = " ".join(raw_expr.strip().split())
-		if not display_expr:
-			continue
-
-		key = display_expr.lower()
-		if key in state_to_capital:
-			state_name, capital_name = state_to_capital[key]
-			print(f"{capital_name} is the capital of {state_name}")
-		elif key in capital_to_state:
-			state_name, capital_name = capital_to_state[key]
-			print(f"{capital_name} is the capital of {state_name}")
-		else:
-			print(f"{display_expr} is neither a capital city nor a state")
-
+def all_in():
+    if len(sys.argv) != 2:
+        return
+    states, capital_cities = get_dicts()
+    state_lookup, capital_lookup = dicts_lookup(states, capital_cities)
+    cleaned_expressions = clear_expressions(sys.argv[1])
+    check_and_print(cleaned_expressions, state_lookup, capital_lookup)
 
 if __name__ == '__main__':
-	main()
+    all_in()
