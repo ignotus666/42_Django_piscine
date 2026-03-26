@@ -1,6 +1,5 @@
 import sys
 
-
 def get_data():
 	states = {
 		"Oregon": "OR",
@@ -16,7 +15,6 @@ def get_data():
 	}
 	return states, capital_cities
 
-
 def main():
 	if len(sys.argv) != 2:
 		return
@@ -30,7 +28,6 @@ def main():
 		return
 
 	print(capital_cities[state_code])
-
 
 if __name__ == '__main__':
 	main()

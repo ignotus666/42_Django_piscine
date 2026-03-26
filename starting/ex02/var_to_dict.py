@@ -23,19 +23,16 @@ def get_musicians():
 	]
 	return d
 
-
-def to_year_dict(couples):
+def to_year_dict(pairs):
 	years = {}
-	for name, year in couples:
+	for name, year in pairs:
 		years.setdefault(year, []).append(name)
 	return years
-
 
 def main():
 	musicians_by_year = to_year_dict(get_musicians())
 	for year, names in musicians_by_year.items():
 		print(f"{year} : {' '.join(names)}")
-
 
 if __name__ == '__main__':
 	main()
