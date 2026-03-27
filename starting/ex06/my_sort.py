@@ -23,11 +23,16 @@ def get_dict():
     }
     return d
 
-def my_sort():
+def sort_musicians():
     musicians_dict = get_dict()
-    sorted_dict = sorted(musicians_dict.items(), key=lambda item: (item[1], item[0])) #lambda is an inline function
-    for name, year in sorted_dict:
+    musicians_list = []
+    for name, year in musicians_dict.items():
+        musicians_list.append((year, name))
+
+    musicians_list.sort()
+
+    for year, name in musicians_list:
         print(name)
 
 if __name__ == '__main__':
-    my_sort()
+    sort_musicians()

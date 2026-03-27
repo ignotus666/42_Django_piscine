@@ -19,18 +19,13 @@ def main():
 		return
 
 	capital = sys.argv[1]
-	state_code = None
+	states_by_code = {code: state for state, code in states.items()}
 	for code, city in capital_cities.items():
 		if city == capital:
-			state_code = code
-			break
+			print(states_by_code[code])
+			return
 
-	if state_code is None:
-		print("Unknown capital city")
-		return
-
-	states_by_code = {code: state for state, code in states.items()}
-	print(states_by_code[state_code])
+	print("Unknown capital city")
 
 if __name__ == '__main__':
 	main()

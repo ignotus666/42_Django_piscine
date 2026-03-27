@@ -1,2 +1,19 @@
-<p>"-Who are you?
--A {name}!"</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <h1>{title}</h1>
+    <p><b>Name:</b></p>
+    <p>{name}</p>
+    <p><b>Surname:</b></p>
+    <p>{surname}</p>
+    <p><b>Age:</b></p>
+    <p>{age}</p>
+    <p><b>Profession:</b></p>
+    <p>{profession}</p>
+  </body>
+</html>
