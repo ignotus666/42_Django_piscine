@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{title}</title>
+    <style>
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+        }}
+
+        table, th, td {{
+            border: 1px solid #6fa362;
+        }}
+
+        th, td {{
+            padding: 10px;
+            text-align: left;
+        }}
+    </style>
+</head>
+<body>
+    <h1>{name} {surname}</h1>
+    <p><strong>{profession}</strong></p>
+    <p>Age: {age}</p>
+    <hr>
+    <h2>Perfil Profesional</h2>
+    <p>Desarrolladora especializada en nada, pero buena gente (a veces).</p>
+    <h2>Habilidades</h2>
+    <ul>
+        <li>Hace buenas lentejas</li>
+        <li>Sabe printear un "hello world!"</li>
+        <li>E e e e e e e e</li>
+        <li>No hay mucho más que poner aquí...</li>
+    </ul>
+    <h2>Educación</h2>
+    <ol>
+        <li>Outercorer 42 Madrid</li>
+        <li>Vía pública</li>
+    </ol>
+    <h2>Experiencia Laboral</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>Año</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>McDonalds</td>
+                <td>2020</td>
+                <td>Encargada oficial en operaciones de eliminación de líquidos en asteráceas</td>
+            </tr>
+            <tr>
+                <td>Burger King</td>
+                <td>2021</td>
+                <td style="border: 2px solid #424242;">Encargada oficial en operaciones de espionaje a empresas rivales</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
