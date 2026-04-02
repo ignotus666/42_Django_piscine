@@ -12,11 +12,11 @@ class Text(str):
         """
         Do you really need a comment to understand this method?..
         """
-        content = super().__str__().replace('&', '&amp;')
-        content = content.replace('<', '&lt;')
-        content = content.replace('>', '&gt;')
-        content = content.replace('"', '&quot;')
-        return content.replace('\n', '\n<br />\n')
+        return (super().__str__()
+            .replace('<', '&lt;')
+            .replace('>', '&gt;')
+            .replace('"', '&quot;')
+            .replace('\n', '\n<br />\n'))
 
 
 class Elem:
@@ -24,8 +24,9 @@ class Elem:
     Elem will permit us to represent our HTML elements.
     """
     class ValidationError(Exception):
-        def __init__(self, msg="Validation Error"):
-            super().__init__(msg)
+        def __init__(self):
+            super().__init__("Validation Error!")
+    #[...]
 
     def __init__(self, tag='div', attr={}, content=None, tag_type='double'):
         """
@@ -33,12 +34,14 @@ class Elem:
 
         Obviously.
         """
-        self.tag = tag
-        self.attr = attr
         self.content = []
         if content is not None:
             self.add_content(content)
+        self.tag = tag
+        self.attr = attr
         self.tag_type = tag_type
+
+        #[...]
 
     def __str__(self):
         """
@@ -50,8 +53,10 @@ class Elem:
         result = '<' + self.tag + self.__make_attr()
         if self.tag_type == 'double':
             result += '>' + self.__make_content() + '</' + self.tag + '>'
+            #[...]
         elif self.tag_type == 'simple':
-            result += ' />'
+            result += '/>'
+            #[...]
         return result
 
     def __make_attr(self):
@@ -72,17 +77,17 @@ class Elem:
             return ''
         result = '\n'
         for elem in self.content:
-            res_elem = str(elem)
-            if res_elem:
-                result += '  ' + res_elem.replace('\n', '\n  ') + '\n'
+            content_str = str(elem)
+            result += '  ' + content_str.replace('\n', '\n  ') + '\n'
+           #[...]
         return result
 
     def add_content(self, content):
         if not Elem.check_type(content):
             raise Elem.ValidationError
         if type(content) == list:
-            self.content += [elem for elem in content if str(elem) != '']
-        elif str(content) != '':
+            self.content += [elem for elem in content if elem != Text('')]
+        elif content != Text(''):
             self.content.append(content)
 
     @staticmethod
@@ -98,6 +103,7 @@ class Elem:
 
 
 if __name__ == '__main__':
+    # [...]
     html = Elem('html', content=[
         Elem('head', content=Elem('title', content=Text('"Hello ground!"'))),
         Elem('body', content=[
